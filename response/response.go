@@ -32,3 +32,7 @@ type Method string
 
 // TODO: 16/12/20 label
 type Label string
+
+func (r *Response) AddResponse(){
+
+}
