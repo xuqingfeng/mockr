@@ -16,7 +16,7 @@ func UserRHandler(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
 	uuid := vars["uuid"]
-
+    fmt.Fprint(w, uuid)
 }
 
 func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
