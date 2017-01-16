@@ -9,7 +9,7 @@ run: build
 	./mockr
 
 build: fmt
-	go-bindata assets/... && go build
+	go build
 
 fmt:
 	go fmt ./...
@@ -18,3 +18,5 @@ test:
 # http://stackoverflow.com/a/29085684/4036946
 	go test -v $$(go list ./... | grep -v /vendor/)
 
+bindata:
+	go-bindata assets/...

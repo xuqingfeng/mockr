@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"mime"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -22,6 +23,7 @@ func UserIndexHandler(w http.ResponseWriter, r *http.Request) {
 	asset, err := Asset("assets/web/index.html")
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
+		return
 	}
 	fmt.Fprint(w, string(asset))
 }
@@ -59,6 +61,7 @@ func AssetsHandler(w http.ResponseWriter, r *http.Request) {
 	asset, err := Asset("assets/" + vars["path"])
 	if err != nil {
 		fmt.Fprint(w, err.Error())
+		return
 	}
 	ctype := mime.TypeByExtension(vars["path"])
 	if ctype == "" {
@@ -71,5 +74,8 @@ func AssetsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	w.Header().Set("Content-Type", ctype)
+	// cache - Last-Modified, ETag
+	w.Header().Set("Cache-Control", "max-age="+strconv.Itoa(7*24*60*60))
+
 	fmt.Fprint(w, string(asset))
 }
