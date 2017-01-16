@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Mockr</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.3.0/css/bulma.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
 </head>
 <body>
 
@@ -63,12 +64,29 @@
                     <label class="label">Body</label>
                 </div>
                 <p class="control has-addons">
-                    <textarea class="textarea">
-
-                    </textarea>
+                    <textarea class="textarea" placeholder="body content"></textarea>
                 </p>
-                <label class="label">mimeType</label>
-                <p class="control">
+                <div class="control is-grouped">
+                    <div class="control">
+                        <label class="label">Method</label>
+                    </div>
+                    <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>GET</option>
+                            <option>POST</option>
+                            <option>PUT</option>
+                            <option>PATCH</option>
+                            <option>DELETE</option>
+                            <option>HEAD</option>
+                            <option>OPTIONS</option>
+                        </select>
+                    </span>
+                    </p>
+                    <div class="control">
+                        <label class="label">mimeType</label>
+                    </div>
+                    <p class="control">
                     <span class="select">
                         <select>
                           <option>application/json</option>
@@ -76,7 +94,8 @@
                           <option>text/plain</option>
                         </select>
                     </span>
-                </p>
+                    </p>
+                </div>
                 <div class="control is-grouped is-pulled-right">
                     <p class="control">
                         <button class="button is-link">Reset</button>
