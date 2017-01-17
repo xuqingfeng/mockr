@@ -15,7 +15,8 @@ func main() {
 	// web path
 	userWebSubRouter := userRouter.PathPrefix("/").Subrouter()
 	userWebSubRouter.HandleFunc("/", UserIndexHandler)
-	userWebSubRouter.HandleFunc("/r/"+`{uuid:\S+}`, UserRHandler)
+	userWebSubRouter.HandleFunc("/r", UserRHandler)
+	userWebSubRouter.HandleFunc("/r/"+`{uuid:\S+}`, UserRUUIDHandler)
 
 	// api path
 	userApiSubRouter := userRouter.PathPrefix("/api").Subrouter()

@@ -8,69 +8,52 @@
 </head>
 <body>
 
-<div class="container">
-    <nav class="nav">
-        <div class="nav-left">
-            <a class="nav-item">
-                <h1 class="title">Mockr</h1>
-            </a>
-        </div>
-        <div class="nav-right nav-menu">
-            <a class="nav-item" href="/docs">
-                DOCS
-            </a>
-            <a class="nav-item" href="/r">
-                CREATE
-            </a>
-            <a class="nav-item" href="https://">
-                GITHUB
-            </a>
-        </div>
-    </nav>
-</div>
+<div id="app">
 
-<div class="container">
-    <nav class="panel">
-        <p class="panel-heading">
-            Builder
-        </p>
-        <div class="panel-block">
-            <div class="control">
+    <mockr-header></mockr-header>
+
+    <div class="container">
+        <nav class="panel">
+            <p class="panel-heading">
+                Builder
+            </p>
+            <div class="panel-block">
                 <div class="control">
-                    <label class="label">Status</label>
-                </div>
-                <p class="control has-addons">
-                    <input type="number" placeholder="200" class="input">
-                    <input type="text" placeholder="OK" class="input">
-                    <a class="button">+</a>
-                </p>
-                <div class="control">
-                    <label class="label">Headers</label>
-                </div>
-                <p class="control has-addons">
-                    <input type="text" placeholder="name" class="input">
-                    <input type="text" placeholder="value" class="input">
-                    <a class="button">+</a>
-                </p>
-                <div class="control">
-                    <label class="label">Cookies</label>
-                </div>
-                <p class="control has-addons">
-                    <input type="text" placeholder="name" class="input">
-                    <input type="text" placeholder="value" class="input">
-                    <a class="button">+</a>
-                </p>
-                <div class="control">
-                    <label class="label">Response Body</label>
-                </div>
-                <p class="control has-addons">
-                    <textarea class="textarea" placeholder="body content"></textarea>
-                </p>
-                <div class="control is-grouped">
                     <div class="control">
-                        <label class="label">Method</label>
+                        <label class="label">Status</label>
                     </div>
-                    <p class="control">
+                    <p class="control has-addons">
+                        <input type="number" placeholder="200" class="input">
+                        <input type="text" placeholder="OK" class="input">
+                        <a class="button">+</a>
+                    </p>
+                    <div class="control">
+                        <label class="label">Headers</label>
+                    </div>
+                    <p class="control has-addons">
+                        <input type="text" placeholder="name" class="input">
+                        <input type="text" placeholder="value" class="input">
+                        <a class="button">+</a>
+                    </p>
+                    <div class="control">
+                        <label class="label">Cookies</label>
+                    </div>
+                    <p class="control has-addons">
+                        <input type="text" placeholder="name" class="input">
+                        <input type="text" placeholder="value" class="input">
+                        <a class="button">+</a>
+                    </p>
+                    <div class="control">
+                        <label class="label">Response Body</label>
+                    </div>
+                    <p class="control has-addons">
+                        <textarea class="textarea" placeholder="body content"></textarea>
+                    </p>
+                    <div class="control is-grouped">
+                        <div class="control">
+                            <label class="label">Method</label>
+                        </div>
+                        <p class="control">
                     <span class="select">
                         <select>
                             <option>GET</option>
@@ -82,11 +65,11 @@
                             <option>OPTIONS</option>
                         </select>
                     </span>
-                    </p>
-                    <div class="control">
-                        <label class="label">mimeType</label>
-                    </div>
-                    <p class="control">
+                        </p>
+                        <div class="control">
+                            <label class="label">mimeType</label>
+                        </div>
+                        <p class="control">
                     <span class="select">
                         <select>
                           <option>application/json</option>
@@ -94,30 +77,27 @@
                           <option>text/plain</option>
                         </select>
                     </span>
-                    </p>
-                </div>
-                <div class="control is-grouped is-pulled-right">
-                    <p class="control">
-                        <button class="button is-link">Reset</button>
-                    </p>
-                    <p class="control">
-                        <button class="button is-primary">Create</button>
-                    </p>
+                        </p>
+                    </div>
+                    <div class="control is-grouped is-pulled-right">
+                        <p class="control">
+                            <button class="button is-link">Reset</button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-primary">Create</button>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</div>
-<br>
-<footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Mockr</strong> by <a href="https://github.com/xuqingfeng">xuqingfeng</a>.
-                The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-            </p>
-        </div>
+        </nav>
     </div>
-</footer>
+
+    <mockr-footer></mockr-footer>
+
+</div>
+
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="/assets/js/component.js"></script>
+<script src="/assets/js/all.js"></script>
 </body>
 </html>

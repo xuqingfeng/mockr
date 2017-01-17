@@ -30,8 +30,20 @@ func UserIndexHandler(w http.ResponseWriter, r *http.Request) {
 
 func UserRHandler(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("Content-Type", "text/html")
+	asset, err := Asset("assets/web/r.html")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
+	fmt.Fprint(w, string(asset))
+}
+
+func UserRUUIDHandler(w http.ResponseWriter, r *http.Request) {
+
 	vars := mux.Vars(r)
 	uuid := vars["uuid"]
+
 	fmt.Fprint(w, uuid)
 }
 
@@ -75,7 +87,7 @@ func AssetsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", ctype)
 	// cache - Last-Modified, ETag
-	w.Header().Set("Cache-Control", "max-age="+strconv.Itoa(7*24*60*60))
+	w.Header().Set("Cache-Control", "max-age="+strconv.Itoa(24*60*60))
 
 	fmt.Fprint(w, string(asset))
 }
