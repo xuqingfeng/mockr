@@ -1,3 +1,7 @@
+[v-cloak] {
+    display: none;
+}
+
 .footer {
     background-color: white;
     padding: 1rem 1.5rem;

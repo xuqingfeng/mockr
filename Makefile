@@ -1,5 +1,3 @@
-.PHONY: all run
-
 deps:
 	go get -v -d ./...
 
