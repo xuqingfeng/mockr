@@ -49,7 +49,8 @@ var app = new Vue({
                 ), function (json) {
                     console.info(json);
                     if (json.success) {
-
+                        // open created mockr detail page
+                        window.location = '/r/' + json.data;
                     }
                 }).fail(function (err) {
                     console.error(err);

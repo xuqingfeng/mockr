@@ -37,23 +37,44 @@ const (
 	responseBucketName = "response"
 )
 
-func (r *Response) AddResponse() error {
+func (r *Response) AddResponse() ([]byte, error) {
 
 	d, err := db.New(db.DbPath, []byte(responseBucketName))
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer d.Close()
 
 	uuid := util.GenerateUUID()
 	rpInByte, err := json.Marshal(r)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	err = d.Set(uuid, rpInByte, []byte(responseBucketName))
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return uuid, nil
+}
+
+func GetResponse(uuid []byte) (Response, error) {
+
+	d, err := db.New(db.DbPath, []byte(responseBucketName))
+	if err != nil {
+		return Response{}, err
+	}
+	defer d.Close()
+
+	ret, err := d.Get(uuid, []byte(responseBucketName))
+	if err != nil {
+		return Response{}, err
+	}
+	var rp Response
+	err = json.Unmarshal(ret, &rp)
+	if err != nil {
+		return Response{}, err
+	}
+
+	return rp, nil
 }

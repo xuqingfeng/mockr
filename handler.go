@@ -47,7 +47,12 @@ func UserRUUIDHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	uuid := vars["uuid"]
 
-	fmt.Fprint(w, uuid)
+	rp, err := response.GetResponse([]byte(uuid))
+	if err != nil {
+		sendMessage(w, false, "E! "+err.Error(), new(struct{}))
+	} else {
+		sendMessage(w, true, "I! get response success", rp)
+	}
 }
 
 func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
@@ -62,11 +67,11 @@ func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			sendMessage(w, false, "E! "+err.Error(), new(struct{}))
 		} else {
-			err = rp.AddResponse()
+			uuid, err := rp.AddResponse()
 			if err != nil {
 				sendMessage(w, false, "E! "+err.Error(), new(struct{}))
 			} else {
-				sendMessage(w, true, "I! add response success", rp)
+				sendMessage(w, true, "I! add response success", uuid)
 			}
 		}
 	case "PUT":
