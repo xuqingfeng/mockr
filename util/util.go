@@ -10,5 +10,6 @@ type Msg struct {
 
 func GenerateUUID() []byte {
 
-	return uuid.NewV4().Bytes()
+	u := uuid.NewV4().String()
+	return []byte(u)
 }
