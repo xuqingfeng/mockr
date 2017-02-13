@@ -1,5 +1,11 @@
 package response
 
+import (
+	"encoding/json"
+	"github.com/xuqingfeng/mockr/db"
+	"github.com/xuqingfeng/mockr/util"
+)
+
 type Response struct {
 	Status       Status   `json:"status"`
 	Headers      []Header `json:"headers"`
@@ -27,6 +33,27 @@ type Cookie struct {
 // TODO: 16/12/20 label
 type Label string
 
-func (r *Response) AddResponse() {
+const (
+	responseBucketName = "response"
+)
 
+func (r *Response) AddResponse() error {
+
+	d, err := db.New(db.DbPath, []byte(responseBucketName))
+	if err != nil {
+		return err
+	}
+	defer d.Close()
+
+	uuid := util.GenerateUUID()
+	rpInByte, err := json.Marshal(r)
+	if err != nil {
+		return err
+	}
+	err = d.Set(uuid, rpInByte, []byte(responseBucketName))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -8,7 +8,7 @@ import (
 
 const (
 	dbFileMode = 0600
-	dbPath     = "/var/lib/mockr/bolt.db"
+	DbPath     = "/var/lib/mockr/bolt.db"
 )
 
 var (

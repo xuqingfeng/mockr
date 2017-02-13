@@ -62,7 +62,12 @@ func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			sendMessage(w, false, "E! "+err.Error(), new(struct{}))
 		} else {
-
+			err = rp.AddResponse()
+			if err != nil {
+				sendMessage(w, false, "E! "+err.Error(), new(struct{}))
+			} else {
+				sendMessage(w, true, "I! add response success", rp)
+			}
 		}
 	case "PUT":
 	// check authorization
