@@ -1,8 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/xuqingfeng/mockr/response"
+	"github.com/xuqingfeng/mockr/util"
 	"mime"
 	"net/http"
 	"strconv"
@@ -54,6 +57,13 @@ func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
 
 	case "POST":
 
+		var rp response.Response
+		err := json.NewDecoder(r.Body).Decode(&rp)
+		if err != nil {
+			sendMessage(w, false, "E! "+err.Error(), new(struct{}))
+		} else {
+
+		}
 	case "PUT":
 	// check authorization
 
@@ -90,4 +100,17 @@ func AssetsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "max-age="+strconv.Itoa(24*60*60))
 
 	fmt.Fprint(w, string(asset))
+}
+
+func sendMessage(w http.ResponseWriter, success bool, message string, data interface{}) {
+
+	msg := util.Msg{
+		Success: success,
+		Message: message,
+		Data:    data,
+	}
+
+	msgInByteSlice, _ := json.Marshal(msg)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(msgInByteSlice)
 }

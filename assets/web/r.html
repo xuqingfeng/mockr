@@ -16,7 +16,6 @@
 
 <div id="app" v-cloak>
 
-    <!--<mockr-header></mockr-header>-->
     <section class="hero is-fullheight">
         <div class="hero-head">
             <div class="container">
@@ -53,60 +52,61 @@
                                 <label class="label">Status</label>
                             </div>
                             <p class="control has-addons">
-                                <input type="number" placeholder="200" class="input">
-                                <input type="text" placeholder="OK" class="input">
-                                <a class="button">+</a>
+                                <input type="number" placeholder="200" class="input" v-model="status.code">
+                                <input type="text" placeholder="OK" class="input" v-model="status.text">
                             </p>
                             <div class="control">
                                 <label class="label">Headers</label>
+                                <a class="button" @click="addHeader">+</a>
                             </div>
-                            <p class="control has-addons">
-                                <input type="text" placeholder="name" class="input">
-                                <input type="text" placeholder="value" class="input">
-                                <a class="button">+</a>
+                            <p class="control has-addons" v-for="(header, index) in headers">
+                                <input type="text" placeholder="name" class="input" v-model="header.name">
+                                <input type="text" placeholder="value" class="input" v-model="header.value">
+                                <a class="button" @click="deleteHeader(index)">-</a>
                             </p>
                             <div class="control">
                                 <label class="label">Cookies</label>
+                                <a class="button" @click="addCookie">+</a>
                             </div>
-                            <p class="control has-addons">
-                                <input type="text" placeholder="name" class="input">
-                                <input type="text" placeholder="value" class="input">
-                                <a class="button">+</a>
+                            <p class="control has-addons" v-for="(cookie, index) in cookies">
+                                <input type="text" placeholder="name" class="input" v-model="cookie.name">
+                                <input type="text" placeholder="value" class="input" v-model="cookie.value">
+                                <a class="button" @click="deleteCookie(index)">-</a>
                             </p>
                             <div class="control">
                                 <label class="label">Response Body</label>
                             </div>
                             <p class="control has-addons">
-                                <textarea class="textarea" placeholder="body content"></textarea>
+                                <textarea class="textarea" placeholder="body content" v-model="responseBody"></textarea>
                             </p>
                             <div class="control is-grouped">
                                 <div class="control">
                                     <label class="label">Method</label>
                                 </div>
                                 <p class="control">
-                    <span class="select">
-                        <select>
-                            <option>GET</option>
-                            <option>POST</option>
-                            <option>PUT</option>
-                            <option>PATCH</option>
-                            <option>DELETE</option>
-                            <option>HEAD</option>
-                            <option>OPTIONS</option>
-                        </select>
-                    </span>
+                                    <span class="select">
+                                        <select v-model="method">
+                                            <option>GET</option>
+                                            <option>POST</option>
+                                            <option>PUT</option>
+                                            <option>PATCH</option>
+                                            <option>DELETE</option>
+                                            <option>HEAD</option>
+                                            <option>OPTIONS</option>
+                                        </select>
+                                    </span>
                                 </p>
                                 <div class="control">
                                     <label class="label">mimeType</label>
                                 </div>
                                 <p class="control">
-                    <span class="select">
-                        <select>
-                          <option>application/json</option>
-                          <option>text/html</option>
-                          <option>text/plain</option>
-                        </select>
-                    </span>
+                                    <span class="select">
+                                        <select v-model="mimeType">
+                                          <option>application/json</option>
+                                          <option>text/html</option>
+                                          <option>text/plain</option>
+                                        </select>
+                                    </span>
                                 </p>
                             </div>
                             <div class="control is-grouped is-pulled-right">
@@ -114,7 +114,7 @@
                                     <button class="button is-link">Reset</button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-primary">Create</button>
+                                    <button class="button is-primary" @click="create">Create</button>
                                 </p>
                             </div>
                         </div>
@@ -124,7 +124,6 @@
         </div>
 
         <div class="hero-foot">
-            <!--<mockr-footer></mockr-footer>-->
             <div class="container">
                 <footer class="footer">
                     <div class="container">
@@ -144,7 +143,7 @@
 </div>
 
 <script src="//unpkg.com/vue/dist/vue.js"></script>
-<script src="/assets/js/component.js"></script>
+<!--<script src="/assets/js/component.js"></script>-->
 <script src="/assets/js/all.js"></script>
 </body>
 </html>
