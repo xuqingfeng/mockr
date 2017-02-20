@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 )
 
@@ -20,20 +21,20 @@ func main() {
 
 	// api path
 	userApiSubRouter := userRouter.PathPrefix("/api").Subrouter()
-	userApiSubRouter.HandleFunc("/response", UserResponseHandler)
+	userApiSubRouter.HandleFunc("/response/"+`{uuid:\S+}`, UserResponseHandler)
 
 	// assets path
 	userRouter.HandleFunc("/assets/"+`{path:\S+}`, AssetsHandler)
 
 	go func() {
-		http.ListenAndServe(":8000", userRouter)
+		log.Fatal(http.ListenAndServe(":8000", userRouter))
 	}()
 
 	// admin router :8001
 	adminRouter := mux.NewRouter()
 
 	go func() {
-		http.ListenAndServe(":8001", adminRouter)
+		log.Fatal(http.ListenAndServe(":8001", adminRouter))
 	}()
 
 	<-finish

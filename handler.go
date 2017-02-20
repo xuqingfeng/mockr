@@ -44,15 +44,13 @@ func UserRHandler(w http.ResponseWriter, r *http.Request) {
 
 func UserRUUIDHandler(w http.ResponseWriter, r *http.Request) {
 
-	vars := mux.Vars(r)
-	uuid := vars["uuid"]
-
-	rp, err := response.GetResponse([]byte(uuid))
+	w.Header().Set("Content-Type", "text/html")
+	asset, err := Asset("assets/web/d.html")
 	if err != nil {
-		sendMessage(w, false, "E! "+err.Error(), new(struct{}))
-	} else {
-		sendMessage(w, true, "I! get response success", rp)
+		fmt.Fprintf(w, err.Error())
+		return
 	}
+	fmt.Fprintf(w, string(asset))
 }
 
 func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
@@ -60,6 +58,15 @@ func UserResponseHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 
+		vars := mux.Vars(r)
+		uuid := vars["uuid"]
+
+		rp, err := response.GetResponse([]byte(uuid))
+		if err != nil {
+			sendMessage(w, false, "E! "+err.Error(), new(struct{}))
+		} else {
+			sendMessage(w, true, "I! get response success", rp)
+		}
 	case "POST":
 
 		var rp response.Response
